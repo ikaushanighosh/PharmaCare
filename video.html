@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title></title>
+        <body>
+          <script>
+            var script = document.createElement("script");
+          
+            script.type = "text/javascript";
+          
+            script.addEventListener("load", function (event) {
+              const meeting = new VideoSDKMeeting();
+          
+              const config = {
+                name: "",
+                apiKey: "5de8200a-6665-40a3-a0ed-93475f75ebeb", 
+                meetingId: "TELEHEALTH_DEMO", 
+                redirectOnLeave: "",
+                micEnabled: true,
+                webcamEnabled: true,
+                participantCanToggleSelfWebcam: true,
+                participantCanToggleSelfMic: true,
+                joinScreen: {
+                  visible: true, // Show the join screen ?
+                  title: "Tele Health Quick Start", // Meeting title
+                  meetingUrl: window.location.href, // Meeting joining url
+                },
+              };
+              
+              meeting.init(config);
+          
+            });
+            script.src = "https://sdk.videosdk.live/rtc-js-prebuilt/0.3.1/rtc-js-prebuilt.js";
+            document.getElementsByTagName("head")[0].appendChild(script);
+          
+          </script>
+
+const config = {
+  // ...
+  recording: {
+    autoStart: true, // auto start recording on participant joined
+    enabled: true,
+    webhookUrl: "https://www.videosdk.live/callback",
+    awsDirPath: `/meeting-recordings/${meetingId}/`, // automatically save recording in this s3 path
+    layout: {
+      type: "SIDEBAR", // "SPOTLIGHT" | "SIDEBAR" | "GRID"
+      priority: "PIN", // "SPEAKER" | "PIN",
+      gridSize: 3,
+    },
+  },
+
+  permissions: {
+    // ...
+    toggleRecording: true, // Can toggle meeting recording
+  },
+  // ...
+  chatEnabled: true,
+};
+
+
+          
+        </body>
+    </head>
+</html>
